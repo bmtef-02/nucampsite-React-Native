@@ -7,13 +7,15 @@ import { ListItem } from 'react-native-elements';
 function Directory(props) {
 
     // Flatlist by default passes an object to this function
-
     // using {item} we can access the current item being iterated over
     const renderDirectoryItem = ({item}) => {
         return (
             <ListItem
                 title={item.name}
                 subtitle={item.description}
+
+                // this prop will fire the function when the <ListItem> component is pressed
+                // the function that fires is the onCampsiteSelect handler from <Main>
                 onPress={() => props.onPress(item.id)}
 
                 // this prop requires an object - so have to use {{}}; outer {} is for JSX
