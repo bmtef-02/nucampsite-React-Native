@@ -14,6 +14,7 @@ function Directory(props) {
             <ListItem
                 title={item.name}
                 subtitle={item.description}
+                onPress={() => props.onPress(item.id)}
 
                 // this prop requires an object - so have to use {{}}; outer {} is for JSX
                 // source is a property that we use to give an image location
