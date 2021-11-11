@@ -36,7 +36,9 @@ class CampsiteInfo extends Component {
     }
 
     render() {
-        // campsiteId will receive the id of the campsite that was clicked on and that will be passed to <RenderCampsite>
+        // in Main, we set CampsiteInfo as a screen component, which automatically has navigation prop
+        // campsiteId will receive the id of the campsite that was clicked on and that will be passed to <RenderCampsite> using getParam
+        // getParam is a function of this.props.navigation, just like the navigate function used in DirectoryComponent
         const campsiteId = this.props.navigation.getParam("campsiteId");
 
         // filter through the campsite array in state to get the campsite we clicked on via campsiteId
