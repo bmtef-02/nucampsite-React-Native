@@ -25,7 +25,7 @@ class Directory extends Component {
         // each screen component, like Directory, has the navigation prop automatically
         // this prop has useful functions like navigate, which goes to another screen
         // we use the navigate function to route to a campsite when a user clicks on the campsite
-        // we destructure the navigation function out of the navigation prop
+        // we destructure the navigate function out of the navigation prop
         const { navigate } = this.props.navigation;
 
         // Flatlist by default passes an object to this function
@@ -37,7 +37,8 @@ class Directory extends Component {
                     subtitle={item.description}
 
                     // this prop will fire the function when the <ListItem> component is pressed
-                    // the function that fires is the navigate function, which will route the CampsiteInfo using campsiteId
+                    // the function that fires is the navigate function, which will route to the CampsiteInfo screen
+                    // campsiteId is a parameter that holds the id of the campsite that we click on
                     onPress={() => navigate("CampsiteInfo", { campsiteId: item.id })}
 
                     // this prop requires an object - so have to use {{}}; outer {} is for JSX

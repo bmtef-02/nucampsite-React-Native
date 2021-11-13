@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import Home from './HomeComponent';
 import Directory from './DirectoryComponent';
 import CampsiteInfo from './CampsiteInfoComponent';
 import Constants from 'expo-constants';
 import { View, Platform } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createAppContainer } from 'react-navigation';
-import ExpoStatusBar from 'expo-status-bar/build/ExpoStatusBar';
 
 // This is the top level stack navigator. createStackNavigator is a function that requires one argument: the route configs object
 const DirectoryNavigator = createStackNavigator(
@@ -34,9 +35,36 @@ const DirectoryNavigator = createStackNavigator(
     }
 );
 
+const HomeNavigator = createStackNavigator(
+    {
+        Home: { screen: Home }
+    },
+    {
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: '#5637DD'
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                color: '#fff'
+            }
+        }
+    }
+);
+
+const MainNavigator = createDrawerNavigator(
+    {
+        Home: { screen: HomeNavigator },
+        Directory: { screen: DirectoryNavigator }
+    },
+    {
+        drawerBackgroundColor: '#CEC8FF'
+    }
+);
+
 // createAppContainer will return a React component that handles connecting the top level navigator to the React Native app
 // usually wrap top level navigator in createAppContainer
-const AppNavigator = createAppContainer(DirectoryNavigator);
+const AppNavigator = createAppContainer(MainNavigator);
 
 class Main extends Component {
 
