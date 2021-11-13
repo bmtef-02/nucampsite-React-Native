@@ -8,7 +8,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createAppContainer } from 'react-navigation';
 
-// This is the top level stack navigator. createStackNavigator is a function that requires one argument: the route configs object
+// createStackNavigator is a function that requires one argument: the route configs object
 const DirectoryNavigator = createStackNavigator(
     
     // route configs object holds the components that are available to the stack
@@ -35,7 +35,11 @@ const DirectoryNavigator = createStackNavigator(
     }
 );
 
+// creating a stack navigator for the home component
 const HomeNavigator = createStackNavigator(
+    
+    // route configs object holds the components that are available to the stack
+    // since there is only 1 screen, we don't need initialRouteName 
     {
         Home: { screen: Home }
     },
@@ -52,11 +56,18 @@ const HomeNavigator = createStackNavigator(
     }
 );
 
+// This is the top level stack navigator. 
+// the createDrawerNavigator function needs a object with the screens that will  be in the drawer
 const MainNavigator = createDrawerNavigator(
+    
+    // the screens that will be in the drawer
+    // we want to put in the drawer the stack navigators for home and directory, not the home and directory components
     {
         Home: { screen: HomeNavigator },
         Directory: { screen: DirectoryNavigator }
     },
+
+    // optional argument to set the drawer background color
     {
         drawerBackgroundColor: '#CEC8FF'
     }
