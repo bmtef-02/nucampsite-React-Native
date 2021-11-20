@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 
 // These 2 components work well together - like <ul> and <li> in HTML
 import { FlatList } from 'react-native';
-import { ListItem } from 'react-native-elements';
+import { Tile } from 'react-native-elements';
 
-import { CAMPSITES } from '../shared/campsites';
+import { connect } from 'react-redux';
+import { baseUrl } from '../shared/baseUrl';
+
+const mapStateToProps = state => {
+    return {
+        campsites: state.campsites,
+    };
+};
 
 class Directory extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            campsites: CAMPSITES
-        };
-    }
 
     // configure the text of the header using static keyword
     static navigationOptions = {
@@ -32,9 +32,10 @@ class Directory extends Component {
         // using {item} we can access the current item being iterated over
         const renderDirectoryItem = ({item}) => {
             return (
-                <ListItem
+                <Tile
                     title={item.name}
-                    subtitle={item.description}
+                    caption={item.description}
+                    featured
 
                     // this prop will fire the function when the <ListItem> component is pressed
                     // the function that fires is the navigate function, which will route to the CampsiteInfo screen
@@ -43,7 +44,7 @@ class Directory extends Component {
 
                     // this prop requires an object - so have to use {{}}; outer {} is for JSX
                     // source is a property that we use to give an image location
-                    leftAvatar={{ source: require('./images/react-lake.jpg')}}
+                    imageSrc={{uri: baseUrl + item.image}}                
                 />
             );
         };
@@ -54,7 +55,7 @@ class Directory extends Component {
             // the function in the renderItem prop will run on every single item
             <FlatList
                 // data property expects an array; holds the campsites array
-                data={this.state.campsites}
+                data={this.props.campsites.campsites}
 
                 // this prop will specify how to render each item in the class
                 renderItem={renderDirectoryItem}
@@ -68,4 +69,4 @@ class Directory extends Component {
     
 }
 
-export default Directory;
+export default connect(mapStateToProps)(Directory);
