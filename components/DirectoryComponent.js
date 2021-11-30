@@ -7,6 +7,7 @@ import { Tile } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import Loading from './LoadingComponent';
+import * as Animatable from 'react-native-animatable';
 
 const mapStateToProps = state => {
     return {
@@ -33,20 +34,22 @@ class Directory extends Component {
         // using {item} we can access the current item being iterated over
         const renderDirectoryItem = ({item}) => {
             return (
-                <Tile
-                    title={item.name}
-                    caption={item.description}
-                    featured
+                <Animatable.View animation='fadeInRightBig' duration={2000}>
+                    <Tile
+                        title={item.name}
+                        caption={item.description}
+                        featured
 
-                    // this prop will fire the function when the <ListItem> component is pressed
-                    // the function that fires is the navigate function, which will route to the CampsiteInfo screen
-                    // campsiteId is a parameter that holds the id of the campsite that we click on
-                    onPress={() => navigate("CampsiteInfo", { campsiteId: item.id })}
+                        // this prop will fire the function when the <ListItem> component is pressed
+                        // the function that fires is the navigate function, which will route to the CampsiteInfo screen
+                        // campsiteId is a parameter that holds the id of the campsite that we click on
+                        onPress={() => navigate("CampsiteInfo", { campsiteId: item.id })}
 
-                    // this prop requires an object - so have to use {{}}; outer {} is for JSX
-                    // source is a property that we use to give an image location
-                    imageSrc={{uri: baseUrl + item.image}}                
-                />
+                        // this prop requires an object - so have to use {{}}; outer {} is for JSX
+                        // source is a property that we use to give an image location
+                        imageSrc={{uri: baseUrl + item.image}}                
+                    />
+                </Animatable.View>
             );
         };
 
